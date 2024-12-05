@@ -510,33 +510,40 @@ flex-grow: 1;
 
 .footer-subscribe {
     display: flex;
+    flex-direction: column;
 }
 
-.label-sub {
+.text-sub {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.02em;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-
-
+    margin-bottom: 16px;
 }
+
+.form-sub {
+    display: flex;
+}
+
+.form-label {
+    gap: 24px;
+}
+
 .input-sub {
     border: 1px solid #fff;
     border-radius: 4px;
     width: 264px;
     height: 40px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
-    background-color: #2e2f42;
+    background-color: transparent;
     margin-top: 16px; 
     font-weight: 400;
     font-size: 12px;
     line-height: 2;
     letter-spacing: 0.04em;
     color: #fff;
-    padding: 8px 16px;
+    padding-left: 16px;
 }
 .input-sub::placeholder {
     font-weight: 400;
@@ -548,25 +555,36 @@ flex-grow: 1;
 }
 
 .button-sub {
+    font-family: inherit;
     border-radius: 4px;
     padding: 8px 24px;
-    width: 165px;
+    min-width: 165px;
     height: 40px;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.04em;
+    cursor: pointer;
     text-align: center;
     color: #fff;
     background: #4d5ae5;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 16px; 
     align-self: flex-end;
     margin-left: 24px;
     border: none;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.button-sub:hover,
+.button-sub:focus {
+    background-color: #404bbf;
+}
+.icon-sub {
+    margin-left: 16px;
+}
 .modal-overlay {
     background-color: rgba(46, 47, 66, 0.4);
     position: fixed;
@@ -580,7 +598,8 @@ flex-grow: 1;
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 250ms ease-in-out;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-overlay.is-open {
@@ -589,47 +608,56 @@ flex-grow: 1;
 }
 
 .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 4px;
     width: 408px;
+    min-height: 584px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 2px 1px 0 rgba(0, 0, 0, 0.2);
     background-color: #fcfcfc;
-    padding: 24px;
-    max-width: 480px;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 72px 24px 24px 24px;
     max-height: 80%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
-.close-icon {
-    position: relative;
-    display: inline-flex;
+.close-button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    background-color: #e7e9fc;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0;
     cursor: pointer;
-    margin-bottom: 24px;
-    margin-left: auto;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
 }
 
-.default-close-icon {
-    width: 24px;
-    height: 24px;
+.close-button:hover,
+.close-button:focus {
+    background-color: #404bbf;
+    border: none;
+    
+} 
 
+.close-icon {
+    fill: #2e2f42;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.check-close-icon {
-    width: 24px;
-    height: 24px;
-    display: none;
-}
-
-.close-icon:hover .default-close-icon,
-.close-icon:focus .default-close-icon {
-    display: none;
-}
-
-.close-icon:hover .check-close-icon,
-.close-icon:focus .check-close-icon {
-    display: inline-block;
+.close-button:hover .close-icon,
+.close-button:focus .close-icon{
+    fill: #ffffff;
 }
 
 .modal-text {
@@ -642,12 +670,16 @@ flex-grow: 1;
     margin-bottom: 16px;
 }
 
+.form-container {
+    margin-bottom: 8px;
+}
 .modal-label {
     font-size: 12px;
     line-height: 1.17;
     letter-spacing: 0.04em;
     color: #8e8f99;
     margin-bottom: 4px;
+    display: block;
 }
 
 .input-wrapper {
@@ -659,7 +691,7 @@ flex-grow: 1;
 
 .input {
     padding-left: 38px;
-    width: 360px;
+    width: 100%;
     height: 40px;
     font-size: 12px;
     line-height: 1.5;
@@ -668,8 +700,9 @@ flex-grow: 1;
     margin-bottom: 8px;
     transition: border-color 250ms ease-in-out;
     border: 1px solid rgba(46, 47, 66, 0.4);
+    background-color: transparent;
     border-radius: 4px;
-    outline: none;
+    outline: transparent;
        
 }
 
@@ -682,14 +715,12 @@ flex-grow: 1;
     height: 18px;
     pointer-events: none;
     fill: #111;
-    transition: fill 250ms ease-in-out;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .comment { 
-    padding-left: 16px;
-    padding-top: 8px;
+    padding: 8px 16px;
     resize: none;
-    box-sizing: border-box;
     height: 120px;
 }
 
@@ -697,7 +728,7 @@ flex-grow: 1;
     color: rgba(46, 47, 66, 0.4);
 }
 
-.input-wrapper:focus-within .input{
+.input:focus-within{
     border-color: #4d5ae5;
 }
 .input-wrapper:focus-within .input-icon {
@@ -710,7 +741,7 @@ flex-grow: 1;
 
 .checkbox-label {
     font-size: 12px;
-    line-height: 1.7;
+    line-height: 1.17;
     letter-spacing: 0.04em;
     color: #8e8f99;
     position: relative;
@@ -724,23 +755,25 @@ flex-grow: 1;
     display: none;
 }
 
-.unchecked-icon {
+.span-checkbox {
     width: 16px;
     height: 16px;
+    border: 1px solid rgba(46, 47, 66, 0.4);
+    border-radius: 2px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    fill: transparent;
     margin-right: 8px;
 }
 
-.checked-icon {
-    width: 16px;
-    height: 16px;
-    display: none;
-    margin-right: 8px;
- }
-
-.checkbox:checked ~ .unchecked-icon {
-    display: none;
+.checkbox:checked+label>.span-checkbox  {
+    background-color: #404bbf;
+    border: none;
+    fill: #F4F4FD
 }
-.checkbox:checked ~ .checked-icon {
+.checkbox:checked+label>.icon-checkbox {
     display: inline-block;
 }
 
@@ -754,13 +787,14 @@ flex-grow: 1;
 }
 
 .modal-button {
+    font-family: inherit;
     display: block;
     border-radius: 4px;
     padding: 16px 32px;
-    width: 169px;
+    min-width: 169px;
     height: 56px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
-    background: #4d5ae5;
+    background-color: #4d5ae5;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
@@ -769,6 +803,8 @@ flex-grow: 1;
     color: #fff;
     margin: 0 auto 24px;
     border: none;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
 .modal-button:hover,
